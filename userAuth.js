@@ -119,8 +119,6 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from
     auth.languageCode = 'en';
     const provider = new GoogleAuthProvider();
 
-    // Define a flag to track whether the event listener is added
-    let googleLoginListenerAdded = false;
 
     // Function to handle Google login
     function handleGoogleLogin() {
@@ -137,17 +135,6 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from
             });
     }
 
-    // Check if the event listener has been added
-    if (!googleLoginListenerAdded) {
-        // Get the element
-        const googleLogin = document.getElementById('btn-login-google');
-
-        // Add the event listener
-        googleLogin.addEventListener('click', handleGoogleLogin);
-
-        // Update the flag to indicate that the event listener is added
-        googleLoginListenerAdded = true;
-    }
 
 
-export default auth;
+export { auth, user };
