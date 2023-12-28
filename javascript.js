@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
 // Your web app's Firebase configuration
@@ -23,7 +23,6 @@ googleLogin.addEventListener('click', function(){
     .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
-        console.log(user);
         window.location.href = "./landing.html";
 
     }).catch((error) => {
@@ -32,6 +31,27 @@ googleLogin.addEventListener('click', function(){
     });
 })
 
+function updateUserProfile(user){
+    const userName = user.displayName;
+    const userEmail = user.email;
+    const userProfilePicture = user.photoURL;
+
+    document.getElementById('userName').textContent = userName;
+    document.getElementById('userEmail').textContent = userEmail;
+    document.getElementById('userProfilePicture').src = userProfilePicture;
+}
+
+onAuthStateChanged(auth, (user) => {
+    if (user){
+        updateUserProfile(user);
+        const uid = user.uid;
+        return uid;
+    }
+    else{
+        alert("Create Account & login");
+        window.location.href = "/register.html"
+    }
+})
 
 
 
