@@ -33,6 +33,42 @@ class newBook {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const loginButtons = document.querySelectorAll('.btn-login');
+loginButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.add('clicked');
+        setTimeout(() => {
+          this.classList.remove('clicked');
+        }, 150);
+      });
+})
+
+
 const cardContainer = document.getElementById('card-container');
 const btnAddContainer = document.getElementById('add-new-continer');
 document.getElementById('btn-add-book').addEventListener('click', function(){
