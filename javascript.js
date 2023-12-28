@@ -1,3 +1,33 @@
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCCczfTwzDOy6bbSqSiJUOhBQZTooWEaWY",
+  authDomain: "mylibrary-db-6b81d.firebaseapp.com",
+  projectId: "mylibrary-db-6b81d",
+  storageBucket: "mylibrary-db-6b81d.appspot.com",
+  messagingSenderId: "899301008619",
+  appId: "1:899301008619:web:4aa5b30dda5f0cfd634aae"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const myLibrary = [];
 function Book(title,author,numberOfPages){
     this.title = title;
