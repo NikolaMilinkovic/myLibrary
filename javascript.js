@@ -21,6 +21,7 @@ const googleLogin = document.getElementById('btn-login-google');
 googleLogin.addEventListener('click', function(){
     signInWithPopup(auth, provider)
     .then((result) => {
+        console.log("Started the button journey");
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
         window.location.href = "./landing.html";
@@ -31,6 +32,7 @@ googleLogin.addEventListener('click', function(){
     });
 })
 
+
 function updateUserProfile(user){
     const userName = user.displayName;
     const userEmail = user.email;
@@ -39,11 +41,14 @@ function updateUserProfile(user){
     document.getElementById('userName').textContent = userName;
     document.getElementById('userEmail').textContent = userEmail;
     document.getElementById('userProfilePicture').src = userProfilePicture;
+    console.log(document.getElementById('userName').value);
+    console.log(document.getElementById('userEmail').value);
 }
 
 onAuthStateChanged(auth, (user) => {
     if (user){
         updateUserProfile(user);
+        console.log("Update user profile");
         const uid = user.uid;
         return uid;
     }
