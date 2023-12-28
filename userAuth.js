@@ -103,7 +103,6 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
     // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyCCczfTwzDOy6bbSqSiJUOhBQZTooWEaWY",
@@ -150,6 +149,5 @@ document.addEventListener('DOMContentLoaded', function() {
         googleLoginListenerAdded = true;
     }
 
-});
 
 export default auth;
