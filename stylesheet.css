@@ -13,7 +13,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-    
+
  margin: 0;
  padding: 0;
  border: 0;
@@ -140,9 +140,9 @@ nav{
 #card-container{
     width: 100vw;
     min-height: 100vh;
-    margin: 2.5rem 15vw;
+    margin: 2.5rem 10vw;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 2.5rem;
 }
 .card{
@@ -152,6 +152,8 @@ nav{
     padding: 3rem;
     display: flex;
     flex-direction: column;
+    min-width: 250px;
+    min-height: 250px;
 }
 .draggable{
     cursor: grab;
@@ -246,11 +248,58 @@ footer{
 }
 /* ==========[ \FOOTER ]========== */
 
-
-
-
-
 .draggable.dragging{
     opacity: 0.5;
     background-color: red;
+}
+
+
+
+@media screen and (max-width: 1900px) {
+    #card-container{
+        margin: 2.5rem 10vw;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+    }
+}
+
+/* MIN WIDTH 601px */
+@media screen and (max-width: 1300px) {
+    #card-container{
+        margin: 2.5rem 5vw;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.5rem;
+    }
+    #nav-container{
+        padding: 1rem 3rem;
+    }
+    #library-logo{
+        height: 60px;
+        width: 100px;
+    }
+    .btn-nav{
+        font-size: 16px;
+    }
+}
+
+/* MAX WIDTH 600px */
+@media screen and (max-width: 800px) {
+    #card-container{
+        margin: 2.5rem 5vw;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1.5rem;
+    }
+    #nav-container{
+        padding: 0.5rem 1.5rem;
+    }
+    #library-logo{
+        height: 60px;
+        width: 100px;
+    }
+    .btn-nav{
+        font-size: 16px;
+    }
 }

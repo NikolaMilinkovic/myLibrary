@@ -100,7 +100,7 @@ function updateDragableList(){
         draggableEl.addEventListener('dragover', () =>{
             
             const selectedDraggable = document.querySelector('.dragging');
-            draggableEl.parentElement.insertBefore(selectedDraggable, draggableEl);
+            draggableEl.insertAdjacentElement('afterend', selectedDraggable);
         })
     })
 
