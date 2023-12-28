@@ -1,32 +1,34 @@
 import { auth } from './userAuth.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-
-
-function updateUserProfile(user){
-    const userName = user.displayName;
-    const userEmail = user.email;
-    const userProfilePicture = user.photoURL;
-
-    document.getElementById('userName').textContent = userName;
-    document.getElementById('userEmail').textContent = userEmail;
-    document.getElementById('userProfilePicture').src = userProfilePicture;
-    console.log(document.getElementById('userName').value);
-    console.log(document.getElementById('userEmail').value);
-}
-
-onAuthStateChanged(auth, (user) => {
-    if (user){
-        updateUserProfile(user);
-        console.log("Update user profile");
-        const uid = user.uid;
-        return uid;
+document.addEventListener('DOMContentLoaded', function() {
+    function updateUserProfile(user){
+        const userName = user.displayName;
+        const userEmail = user.email;
+        const userProfilePicture = user.photoURL;
+    
+        document.getElementById('userName').textContent = userName;
+        document.getElementById('userEmail').textContent = userEmail;
+        document.getElementById('userProfilePicture').src = userProfilePicture;
+        console.log(document.getElementById('userName').value);
+        console.log(document.getElementById('userEmail').value);
     }
-    else{
-        alert("Create Account & login");
-        window.location.href = "./index.html"
-    }
-})
+    
+    onAuthStateChanged(auth, (user) => {
+        if (user){
+            updateUserProfile(user);
+            console.log("Update user profile");
+            const uid = user.uid;
+            return uid;
+        }
+        else{
+            alert("Create Account & login");
+            window.location.href = "./index.html"
+        }
+    })
+});
+
+
 
 const myLibrary = [];
 function Book(title,author,numberOfPages){
