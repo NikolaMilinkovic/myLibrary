@@ -18,8 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
     auth.languageCode = 'en'
     const provider = new GoogleAuthProvider();
     const googleLogin = document.getElementById('btn-login-google');
-    googleLogin.addEventListener('click', function(){
-        signInWithPopup(auth, provider)
+
+
+    // Define a flag to track whether the event listener is added
+let googleLoginListenerAdded = false;
+
+// Function to handle Google login
+function handleGoogleLogin() {
+    signInWithPopup(auth, provider)
         .then((result) => {
             console.log("Started the button journey");
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -30,7 +36,34 @@ document.addEventListener('DOMContentLoaded', function() {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
-    })
+}
+
+// Check if the event listener has been added
+if (!googleLoginListenerAdded) {
+    // Get the element
+    const googleLogin = document.getElementById('btn-login-google');
+
+    // Add the event listener
+    googleLogin.addEventListener('click', handleGoogleLogin);
+
+    // Update the flag to indicate that the event listener is added
+    googleLoginListenerAdded = true;
+}
+
+
+    // googleLogin.addEventListener('click', function(){
+    //     signInWithPopup(auth, provider)
+    //     .then((result) => {
+    //         console.log("Started the button journey");
+    //         const credential = GoogleAuthProvider.credentialFromResult(result);
+    //         const user = result.user;
+    //         window.location.href = "./landing.html";
+
+    //     }).catch((error) => {
+    //         const errorCode = error.code;
+    //         const errorMessage = error.message;
+    //     });
+    // })
 
 
     function updateUserProfile(user){
