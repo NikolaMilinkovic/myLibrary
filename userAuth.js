@@ -179,5 +179,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-const authExport = { auth };
-export default authExport;
+export default auth;
