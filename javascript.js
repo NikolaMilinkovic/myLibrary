@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
 // Your web app's Firebase configuration
@@ -14,7 +14,23 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = 'en'
+const provider = new GoogleAuthProvider();
+const googleLogin = document.getElementById('btn-login-google');
+googleLogin.addEventListener('click', function(){
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        console.log(user);
+        window.location.href = "./landing.html";
 
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
+})
 
 
 
