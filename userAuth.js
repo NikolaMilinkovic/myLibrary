@@ -137,4 +137,4 @@ function handleGoogleLogin() {
 }
 
 // Export auth and user
-export { auth, user };
+export { auth, user, handleGoogleLogin };
