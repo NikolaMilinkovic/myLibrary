@@ -103,38 +103,38 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from
 
 
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCCczfTwzDOy6bbSqSiJUOhBQZTooWEaWY",
-        authDomain: "mylibrary-db-6b81d.firebaseapp.com",
-        projectId: "mylibrary-db-6b81d",
-        storageBucket: "mylibrary-db-6b81d.appspot.com",
-        messagingSenderId: "899301008619",
-        appId: "1:899301008619:web:4aa5b30dda5f0cfd634aae"
-    };
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCCczfTwzDOy6bbSqSiJUOhBQZTooWEaWY",
+    authDomain: "mylibrary-db-6b81d.firebaseapp.com",
+    projectId: "mylibrary-db-6b81d",
+    storageBucket: "mylibrary-db-6b81d.appspot.com",
+    messagingSenderId: "899301008619",
+    appId: "1:899301008619:web:4aa5b30dda5f0cfd634aae"
+};
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    auth.languageCode = 'en';
-    const provider = new GoogleAuthProvider();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = 'en';
+const provider = new GoogleAuthProvider();
 
+let user; // Declare user variable
 
-    // Function to handle Google login
-    function handleGoogleLogin() {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                console.log("Started the button journey");
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const user = result.user;
-                window.location.href = "./landing.html";
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-    }
+// Function to handle Google login
+function handleGoogleLogin() {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            console.log("Started the button journey");
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            user = result.user; // Set the user variable
+            window.location.href = "./landing.html";
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+}
 
-
-
+// Export auth and user
 export { auth, user };
