@@ -35,7 +35,7 @@ const firebaseConfig = {
   })
 
   function updateUserProfile(user){
-    
+
     const userName = user.displayName;
     const userEmail = user.email;
     const userProfilePicture = user.photoURL;
@@ -45,8 +45,6 @@ const firebaseConfig = {
     document.getElementById('userProfilePicture').src = userProfilePicture;
     console.log(document.getElementById('userName').value);
   }
-
-  updateUserProfile(user);
 
 
   var redirectedToLogin = false;
