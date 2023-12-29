@@ -128,7 +128,7 @@ function handleGoogleLogin() {
             console.log("Started the button journey");
             const credential = GoogleAuthProvider.credentialFromResult(result);
             user = result.user; // Set the user variable
-            window.location.href = "./landing.html";
+            window.location.href = "./index.html";
         })
         .catch((error) => {
             const errorCode = error.code;

@@ -8,12 +8,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="./index.js" defer type="module"></script>
-    <script src="./userAuth.js" defer type="module"></script>
+    <!-- <script src="./userAuth.js" defer type="module"></script> -->
     <link rel="stylesheet" href="./stylesheet.css">
     <title>myLibrary</title>
 </head>
 <body>
-    <section id="login-section">
+    <nav id="nav-bar">
+        <div id="nav-container">
+            <h1 id="userName"></h1>
+            <h1 id="userEmail"></h1>
+            <img id="userProfilePicture">
+            <div id="logo-container">
+                <img id="library-logo" src="./Images/library-logo-png.png" alt="Golden book logo with a planet on top of it" >
+            </div>
+            <div id="nav-options-container">
+                <button class="btn-nav" id="btn-remove-entries">Remove all entries</button>
+                <button class="btn-nav" id="btn-login"><a href="#">Login</a></button>
+                <button class="btn-nav login-display" id="btn-logout"><a href="#">Logout</a></button>
+            </div>
+        </div>
+    </nav>
+    <section id="card-section">
+        <div id="card-container">
+            <div class="card" id="add-new-continer">
+                <h1 id="h1-new-book">Add new book!</h1>
+                <input type="text" class="new-book-input" id="input-title" placeholder="Book title">
+                <input type="text" class="new-book-input" id="input-author" placeholder="Author">
+                <input type="number" class="new-book-input" id="input-pages" placeholder="Number of pages">
+                <div id="btn-add-container">
+                    <button id="btn-add-book" class="btn-add-book">Add new book</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <footer id="footer">
+        <div id="footer-container">
+            <div id="socials-container">
+
+            </div>
+        </div>
+    </footer>
+    <section id="login-section" class="login-display">
         <div id="login-container">
             <div id="login-input-container">
                 <div id="login-logo-container">
@@ -25,7 +61,7 @@
                     <input type="text" name="inputUsername" id="input-username" class="login-input-field">
                     <label for="inputPassword" class="login-input-label">Password</label>
                     <input type="password" name="inputPassword" id="input-password" class="login-input-field">
-                    <a href="./landing.html"><button id="btn-input-login" class="btn-login">Log in</button></a>
+                    <button id="btn-input-login" class="btn-login">Log in</button>
                 </div>
                 <div id="login-options">
                     <button class="btn-login" id="btn-login-google" onclick="handleGoogleLogin()">

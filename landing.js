@@ -1,70 +1,88 @@
 // import { auth } from './userAuth.js';
-import { auth, user } from './userAuth.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+// import { auth, user } from './userAuth.js';
+// import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const user = user;
+// const user = user;
 
-function updateUserProfile(user){
-    const userName = user.displayName;
-    const userEmail = user.email;
-    const userProfilePicture = user.photoURL;
+// function updateUserProfile(user){
+//     const userName = user.displayName;
+//     const userEmail = user.email;
+//     const userProfilePicture = user.photoURL;
 
-    document.getElementById('userName').textContent = userName;
-    document.getElementById('userEmail').textContent = userEmail;
-    document.getElementById('userProfilePicture').src = userProfilePicture;
-    console.log(document.getElementById('userName').value);
-    console.log(document.getElementById('userEmail').value);
-}
+//     document.getElementById('userName').textContent = userName;
+//     document.getElementById('userEmail').textContent = userEmail;
+//     document.getElementById('userProfilePicture').src = userProfilePicture;
+//     console.log(document.getElementById('userName').value);
+//     console.log(document.getElementById('userEmail').value);
+// }
 
-onAuthStateChanged(auth, (user) => {
-    if (user){
-        updateUserProfile(user);
-        console.log("Update user profile");
-        const uid = user.uid;
-        return uid;
-    }
-    else{
-        alert("Create Account & login");
-        window.location.href = "./index.html"
-    }
-})
+// onAuthStateChanged(auth, (user) => {
+//     if (user){
+//         updateUserProfile(user);
+//         console.log("Update user profile");
+//         const uid = user.uid;
+//         return uid;
+//     }
+//     else{
+//         alert("Create Account & login");
+//         window.location.href = "./index.html"
+//     }
+// })
 
 
 const myLibrary = [];
-function Book(title,author,numberOfPages){
+
+
+function Book(title,author,numberOfPages,read){
     this.title = title;
     this.author = author;
     this.numberOfPages = numberOfPages;
+    this.read = read;
+    return Book;
+}
+function addBookToLibrary(Book) {
+    myLibrary.concat(Book);
 }
 
-
-
-function addBookToLibrary() {
-    myLibrary.concat(Book)
-  }
-Book.prototype.whatBook = function(Book){
+Book.prototype.whatBook = function(){
     console.log(Book.title + " is the name of the book!")
 }
 
-class newBook {
-    // Sets up my object
-    constructor(title,author,numberOfPages){
-        this.title = title;
-        this.author = author;
-        this.numberOfPages = numberOfPages;
-    }
+// class newBook {
+//     // Sets up my object
+//     constructor(title,author,numberOfPages){
+//         this.title = title;
+//         this.author = author;
+//         this.numberOfPages = numberOfPages;
+//     }
 
-    set title(_title){
-        this.title = _title;
-    }
-    set author(_author){
-        this.author = _author;
-    }
-    set numberOfPages(_numberOfPages){
-        this.numberOfPages = _numberOfPages;
-    }
-}
+//     set title(_title){
+//         this.title = _title;
+//     }
+//     set author(_author){
+//         this.author = _author;
+//     }
+//     set numberOfPages(_numberOfPages){
+//         this.numberOfPages = _numberOfPages;
+//     }
+// }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CARD CREATION LOGIC
 
 const cardContainer = document.getElementById('card-container');
 const btnAddContainer = document.getElementById('add-new-continer');
