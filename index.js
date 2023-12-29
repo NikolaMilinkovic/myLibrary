@@ -40,18 +40,19 @@ const firebaseConfig = {
     const userProfilePicture = user.photoURL;
 
     document.getElementById('userName').textContent = userName;
-    document.getElementById('userEmail').textContent = userEmail;
+    // document.getElementById('userEmail').textContent = userEmail;
     document.getElementById('userProfilePicture').src = userProfilePicture;
     console.log(document.getElementById('userName').value);
     console.log(document.getElementById('userEmail').value);
   }
 
   var redirectedToLogin = false;
-
+  const profileContainer = document.getElementById('user-profile-container');
   onAuthStateChanged(auth, (user) => {
     if (user){
         updateUserProfile(user);
         console.log("Update user profile");
+        profileContainer.classList.toggle('library-display');
         const uid = user.uid;
         return uid;
     }

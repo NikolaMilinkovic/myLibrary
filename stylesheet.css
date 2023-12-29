@@ -94,6 +94,12 @@ nav{
     align-items: center;
     justify-content: center;
 }
+#nav-options-container{
+    display: flex;
+}
+#user-profile-container{
+    display: flex
+}
 #logo-container{
     display: flex;
     margin-right: auto;
