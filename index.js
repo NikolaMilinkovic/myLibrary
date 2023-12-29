@@ -43,27 +43,41 @@ const firebaseConfig = {
     // document.getElementById('userEmail').textContent = userEmail;
     document.getElementById('userProfilePicture').src = userProfilePicture;
     console.log(document.getElementById('userName').value);
-    console.log(document.getElementById('userEmail').value);
   }
 
   var redirectedToLogin = false;
   const profileContainer = document.getElementById('user-profile-container');
   onAuthStateChanged(auth, (user) => {
-    if (user){
-        updateUserProfile(user);
-        console.log("Update user profile");
-        profileContainer.classList.toggle('library-display');
-        const uid = user.uid;
-        return uid;
-    }
-    else{
+    if (user) {
+      updateUserProfile(user);
+      console.log("Update user profile");
+      profileContainer.classList.toggle('library-display');
+      const uid = user.uid;
+      // Redirect logic here if needed
+    } else {
       if (!redirectedToLogin && window.location.pathname !== '/index.html') {
         alert("Create Account & login");
         redirectedToLogin = true;  // Set the flag
         window.location.href = "./index.html";
       }
     }
-  })
+  });
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user){
+  //       updateUserProfile(user);
+  //       console.log("Update user profile");
+  //       profileContainer.classList.toggle('library-display');
+  //       const uid = user.uid;
+  //       return uid;
+  //   }
+  //   else{
+  //     if (!redirectedToLogin && window.location.pathname !== '/index.html') {
+  //       alert("Create Account & login");
+  //       redirectedToLogin = true;  // Set the flag
+  //       window.location.href = "./index.html";
+  //     }
+  //   }
+  // })
 
 
 
