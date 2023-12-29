@@ -202,7 +202,7 @@ nav{
     color: var(--font-color);
     font-size: 14px;
 }
-.card-red{
+.card-read{
     background-color: #8B0000;
 }
 .card-btn:hover{
@@ -460,7 +460,7 @@ label.login-input-label{
     .card{
     height: 35vh;
     min-width: 250px;
-    min-height: 250px;
+    min-height: 270px;
     }
 }
 
@@ -486,7 +486,7 @@ label.login-input-label{
     .card{
     height: 30vh;
     min-width: 200px;
-    min-height: 250px;
+    min-height: 270px;
     }
     #login-input-container{
         min-width: 220px;
