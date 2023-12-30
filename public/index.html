@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="myLibrary a small practice web app that is a part of the odin project curriculum.">
+    <meta name="keywords" content="myLibrary">
+    <meta name="author" content="Nikola Milinkovic | nikolamilinkovic221@gmail.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <!-- <script src="./userAuth.js" defer type="module"></script> -->
+    <link rel="stylesheet" href="./stylesheet.css">
+    <title>myLibrary</title>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js" defer></script>
+
+    <script type="module" defer>
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCLeaiamldITlPaxFJQDz28FtSJ2e4p0I0",
+          authDomain: "mylibrarydb-26266.firebaseapp.com",
+          projectId: "mylibrarydb-26266",
+          storageBucket: "mylibrarydb-26266.appspot.com",
+          messagingSenderId: "1023461624597",
+          appId: "1:1023461624597:web:330476c0e662f19e36371c"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="./index.js" defer type="module"></script>
+</head>
+<body>
+    <nav id="nav-bar" class="library-display">
+        <div id="nav-container">
+            <div id="logo-container">
+                <img id="library-logo" src="./Images/library-logo-png.png" alt="Golden book logo with a planet on top of it" >
+            </div>
+            <div id="nav-options-container">
+                <button class="btn-nav" id="btn-remove-entries">Remove all entries</button>
+                <div id="user-profile-container">
+                    <img id="user-profile-image" src="" alt="User profile image">
+                    <h1 id="user-name"></h1>
+                </div>
+                <!-- <button class="btn-nav" id="btn-login"><a href="#">Sign in</a></button> -->
+                <button class="btn-nav" id="btn-sign-out"><a href="#">Sign out</a></button>
+            </div>
+        </div>
+    </nav>
+    <section id="card-section" class="library-display">
+        <div id="card-container">
+            <div class="card" id="add-new-continer">
+                <h1 id="h1-new-book">Add new book!</h1>
+                <input type="text" class="new-book-input" id="input-title" placeholder="Book title">
+                <input type="text" class="new-book-input" id="input-author" placeholder="Author">
+                <input type="number" class="new-book-input" id="input-pages" placeholder="Number of pages">
+                <div id="btn-add-container">
+                    <button id="btn-add-book" class="btn-add-book">Add new book</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <footer id="footer" class="library-display">
+        <div id="footer-container">
+            <div id="socials-container">
+
+            </div>
+        </div>
+    </footer>
+    <section id="login-section" class="">
+        <div id="login-container">
+            <div id="login-input-container">
+                <div id="login-logo-container">
+                    <img id="login-logo" src="./Images/library-logo-png.png" alt="" srcset="">
+                </div>
+                <div id="login-fields-container">
+                    <h1 id="login-h1">LOGIN</h1>
+                    <label for="inputUsername" class="login-input-label">Username</label>
+                    <input type="text" name="inputUsername" id="input-username" class="login-input-field">
+                    <label for="inputPassword" class="login-input-label">Password</label>
+                    <input type="password" name="inputPassword" id="input-password" class="login-input-field">
+                    <button id="btn-input-login" class="btn-login">Log in</button>
+                </div>
+                <div id="login-options">
+                    <button class="btn-login" id="btn-login-google" onclick="handleGoogleLogin()">
+                        <img class="img-login-options" src="./Images/logo-google.svg" alt="" srcset=""> Sign in with Google
+                    </button>
+                    <button class="btn-login">
+                        <img class="img-login-options" src="./Images/github.svg" alt="" srcset=""> Sign in with GitHub
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
