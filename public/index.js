@@ -13,41 +13,21 @@ const userProfileImage = document.getElementById('user-profile-image');
 const userName = document.getElementById('user-name');
 
 const provider = new firebase.auth.GoogleAuthProvider();
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Check the initial authentication state
+  const initialUser = auth.currentUser;
+  handleAuthStateChange(initialUser);
+});
+
+
 // Sign in / Sign out handling
 signInBtn.onclick = () => auth.signInWithPopup(provider);
 signOutBtn.onclick = () => auth.signOut();
 
-auth.onAuthStateChanged(user =>{
-  if(user){
-    // signed in
-    whenSignedInNav.classList.toggle('library-display');
-    whenSignedInCards.classList.toggle('library-display');
-    whenSignedInFooter.classList.toggle('library-display');
-    whenSignedOut.classList.toggle('library-display');
-    userProfileImage.src = `${user.photoURL}`;
-    userName.innerHTML = `${user.displayName}`;
-
-    libraryRef = db.collection('Libraries');
-    unsubscribe = libraryRef
-      .where('uid', '==', user.uid)
-      .onSnapshot(querySnapshot => {
-        const bookList = querySnapshot.docs.map(doc => {
-          return new Book(doc.data().title, doc.data().author, doc.data().numberOfPages, doc.data().read);
-        });
-        importBookList(bookList);
-        removeAllDivs();
-        displayLibrary();
-      });
-
-  } else {
-    // not signed in
-    whenSignedInNav.classList.toggle('library-display');
-    whenSignedInCards.classList.toggle('library-display');
-    whenSignedInFooter.classList.toggle('library-display');
-    whenSignedOut.classList.toggle('library-display');
-    userProfileImage.src = "";
-    userName.innerHTML = "";
-  }
+auth.onAuthStateChanged(user => {
+  handleAuthStateChange(user);
 });
 
 const db = firebase.firestore();
@@ -56,53 +36,81 @@ const addNewBook = document.getElementById('btn-add-book');
 let libraryRef;
 let unsubscribe;
 
-auth.onAuthStateChanged(user => {
-  if(user){
+function handleAuthStateChange(user) {
+  if (user) {
     // signed in
+    whenSignedInNav.classList.remove('library-display');
+    whenSignedInCards.classList.remove('library-display');
+    whenSignedInFooter.classList.remove('library-display');
+    whenSignedOut.classList.add('library-display');
+    userProfileImage.src = `${user.photoURL}`;
+    userName.innerHTML = `${user.displayName}`;
+
     libraryRef = db.collection('Libraries');
-    addNewBook.onclick = () => {
-      const { serverTimestamp } = firebase.firestore.FieldValue;
-      const newBook = inputBook();
-      clearInputFields();
-      console.log(newBook.docId);
+    unsubscribe = libraryRef
+      .where('uid', '==', user.uid)
+      .onSnapshot(querySnapshot => {
+        const bookList = querySnapshot.docs.map(doc => {
+          return new Book(doc.data().title, doc.data().author, doc.data().numberOfPages, doc.data().read, doc.id);
+        });
+
+        importBookList(bookList);
+        removeAllDivs();
+        displayLibrary();
+      });
+
+    setUpAddNewBookEvent(user);
+  } else {
+    // not signed in
+    whenSignedInNav.classList.add('library-display');
+    whenSignedInCards.classList.add('library-display');
+    whenSignedInFooter.classList.add('library-display');
+    whenSignedOut.classList.remove('library-display');
+    userProfileImage.src = "";
+    userName.innerHTML = "";
+  }
+}
 
 
-      libraryRef.add({
-        uid: user.uid,
-        title: newBook.title,
-        author: newBook.author,
-        numberOfPages: newBook.numberOfPages,
-        read: newBook.read,
-        createdAt: serverTimestamp()
-      })
+
+function setUpAddNewBookEvent(user) {
+  libraryRef = db.collection('Libraries');
+  const addNewBook = document.getElementById('btn-add-book');
+
+  addNewBook.onclick = () => {
+    const { serverTimestamp } = firebase.firestore.FieldValue;
+    const newBook = inputBook();
+    clearInputFields();
+
+    libraryRef.add({
+      uid: user.uid,
+      title: newBook.title,
+      author: newBook.author,
+      numberOfPages: newBook.numberOfPages,
+      read: newBook.read,
+      createdAt: serverTimestamp()
+    })
       .then((docRef) => {
         newBook.docId = docRef.id;
         console.log('Document written with ID:', docRef.id);
-        console.log(newBook.docId);
       })
       .catch((error) => {
         console.error('Error adding document:', error);
-      });;
+      });
 
-      unsubscribe = libraryRef
-        .where ('uid', '==', user.uid)
-        .onSnapshot(querySnapshot => {
-          const bookList = querySnapshot.docs.map(doc => {
-              return new Book(doc.data().title, doc.data().author, doc.data().numberOfPages, doc.data().read, doc.id);
-
-          });
-          importBookList(bookList);
-          removeAllDivs();
-          displayLibrary();
+    unsubscribe = libraryRef
+      .where('uid', '==', user.uid)
+      .onSnapshot(querySnapshot => {
+        const bookList = querySnapshot.docs.map(doc => {
+          return new Book(doc.data().title, doc.data().author, doc.data().numberOfPages, doc.data().read, doc.id);
         });
 
-    }
-
-  } else {
-    // not signed in
-
+        importBookList(bookList);
+        removeAllDivs();
+        displayLibrary();
+      });
   }
-});
+}
 
 const importBookList = (bookList) =>{
   library.removeAllBooks();
@@ -185,7 +193,7 @@ const inputBook = () => {
 document.getElementById('btn-add-book').addEventListener('click', function(){
     // const newBook = inputBook();
     // library.addNewBook(newBook);
-    removeAllDivs();
+    // removeAllDivs();
     // displayLibrary();
 });
 
