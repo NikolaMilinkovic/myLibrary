@@ -163,7 +163,7 @@ h1#user-name{
 #card-container{
     width: 100vw;
     min-height: 100vh;
-    margin: 2.5rem 10vw;
+    margin: 2.5rem 8vw;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2.5rem;
@@ -462,7 +462,7 @@ label.login-input-label{
 }
 
 /* MIN WIDTH 601px */
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1470px) {
     #card-container{
         margin: 2.5rem 5vw;
         display: grid;
@@ -524,3 +524,34 @@ label.login-input-label{
 }
 /* ==========[ \RESPONSIVE DESIGN ]========== */
 
+.golden-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(to bottom, #ffd700, #ffcc00);
+    border: 1px solid #cca300;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .golden-button:hover {
+    background: linear-gradient(to bottom, #ffcc00, #ffd700);
+  }
+  
+  /* Golden Texture Overlay */
+  .golden-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("./Images/gold-2.jpg");
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+  }

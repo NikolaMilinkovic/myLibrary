@@ -78,6 +78,8 @@ function setUpAddNewBookEvent(user) {
   const addNewBook = document.getElementById('btn-add-book');
 
   addNewBook.onclick = () => {
+    if(inputAuthor.value === "" || inputTitle.value === "")
+      return;
     const { serverTimestamp } = firebase.firestore.FieldValue;
     const newBook = inputBook();
     clearInputFields();
@@ -189,13 +191,6 @@ const inputBook = () => {
   const inputPages = document.getElementById('input-pages').value;
   return new Book(inputTitle, inputAuthor, inputPages, false, null);
 }
-
-document.getElementById('btn-add-book').addEventListener('click', function(){
-    // const newBook = inputBook();
-    // library.addNewBook(newBook);
-    // removeAllDivs();
-    // displayLibrary();
-});
 
 const clearInputFields = () =>{
   inputTitle.value = '';
