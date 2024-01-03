@@ -66,6 +66,13 @@ table {
     --card-font-weight: bold;
     --card-input-background-color: #1C1B19;
     --card-input-placeholder-color: #454541;
+
+
+    --card-read-text-color:  #FFFFFF;
+    --card-read-background-color: #008000;
+
+    --card-not-read-text-color: #FFFFFF;
+    --card-not-read-background-color: #800000;
 }
 a {
     color: inherit;
@@ -78,6 +85,51 @@ html, body{
     background-color: var(--background-color);
 }
 
+
+/* ==========[ LOAD IN OVERLAY ]========== */
+#page-load-in-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: var(--background-color);
+    opacity: 1;
+    pointer-events: none;
+}
+#page-load-logo-container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.overlay-animations{
+    animation: overlay-logo-grow 1.6s ease-in forwards;
+}
+
+@keyframes overlay-logo-grow {
+
+    0%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    60%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: scale(2);
+        display: none;
+    }
+  
+}
+/* ==========[ \LOAD IN OVERLAY ]========== */
+
+
+
+
 /* ==========[ NAV BAR ]========== */
 nav{
     background-color: var(--nav-background-color);
@@ -86,6 +138,7 @@ nav{
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1;
 }
 #nav-container{
     padding: 1rem 7rem;
@@ -298,18 +351,16 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 1rem;
     background-color: var(--nav-hover-color);
     cursor: pointer;
+    z-index: 0;
 }
-.btn-add-book:hover{
-    animation: add-book-animation 0.5s ease-in-out forwards;
-}
-@keyframes add-book-animation {
-    from{
 
-    }
-    to{
-        background-color: #FFFFFF;
-        color: var(--card-background-color);
-    }
+.book-is-read{
+    color: var(--card-read-text-color);
+    background-color: var(--card-read-background-color);
+}
+.book-is-not-read{
+    color: var(--card-not-read-text-color);
+    background-color: var(--card-not-read-background-color);
 }
 /* ==========[ \CARDS ]========== */
 
@@ -448,9 +499,6 @@ label.login-input-label{
 }
 
 
-
-
-
 /* ==========[ RESPONSIVE DESIGN ]========== */
 @media screen and (max-width: 1900px) {
     #card-container{
@@ -498,6 +546,14 @@ label.login-input-label{
     #nav-container{
         padding: 0.5rem 1.5rem;
     }
+    h1#user-name{
+        padding: 0.2rem;
+        font-size: 16px;
+    }
+    img#user-profile-image{
+        height: 35px;
+        width: 35px;
+    }
     #library-logo{
         height: 50px;
         width: 80px;
@@ -531,7 +587,7 @@ label.login-input-label{
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    color: #fff;
+    color: var(--background-color);
     background: linear-gradient(to bottom, #ffd700, #ffcc00);
     border: 1px solid #cca300;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -555,3 +611,4 @@ label.login-input-label{
     mix-blend-mode: multiply;
     opacity: 0.7;
   }
+  

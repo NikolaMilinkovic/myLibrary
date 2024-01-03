@@ -5,6 +5,8 @@ const whenSignedInNav = document.getElementById('nav-bar');
 const whenSignedInCards = document.getElementById('card-section');
 const whenSignedInFooter = document.getElementById('footer');
 const whenSignedOut = document.getElementById('login-section');
+const pageLoadInOverlay = document.getElementById('page-load-in-overlay');
+const pageLoadInOverlayLogo = document.getElementById('page-load-library-logo');
 
 const signInBtn = document.getElementById('btn-login-google');
 const signOutBtn = document.getElementById('btn-sign-out');
@@ -46,6 +48,7 @@ function handleAuthStateChange(user) {
     userProfileImage.src = `${user.photoURL}`;
     userName.innerHTML = `${user.displayName}`;
 
+
     libraryRef = db.collection('Libraries');
     unsubscribe = libraryRef
       .where('uid', '==', user.uid)
@@ -78,6 +81,13 @@ function setUpAddNewBookEvent(user) {
   const addNewBook = document.getElementById('btn-add-book');
 
   addNewBook.onclick = () => {
+
+    addNewBook.classList.add('clicked');
+    setTimeout(()=>{
+      addNewBook.classList.remove('clicked');
+    }, 200);
+
+
     if(inputAuthor.value === "" || inputTitle.value === "")
       return;
     const { serverTimestamp } = firebase.firestore.FieldValue;
@@ -175,7 +185,7 @@ class Library {
 }
 
 const library = new Library();
-
+var cardDivReferences = [];
 
 // CARD CREATION LOGIC
 
@@ -201,8 +211,6 @@ const clearInputFields = () =>{
 document.getElementById('btn-remove-entries').addEventListener('click', function(){
     removeAllEntries();
 });
-
-let cardDivReferences = [];
 
 const displayLibrary = () =>{
   library.books.forEach(book => {
@@ -231,8 +239,41 @@ const displayCard = (book) =>{
     pagesHeader.innerHTML = "Number of pages:"
     pages.innerHTML = book.numberOfPages;
     pages.style.overflowWrap = 'break-word';
-    btnRead.innerHTML = "Book not finished"
     btnRemoveBook.innerHTML = "Remove"
+
+    if(book.read === true){
+      btnRead.classList.add('book-is-read');
+      btnRead.innerHTML = "Book has been read"
+    }
+    else{
+      btnRead.classList.add('book-is-not-read');
+      btnRead.innerHTML = "Book not read"
+    }
+
+    btnRead.addEventListener('click', ()=>{
+      const documentId = book.docId;
+      const documentRef = libraryRef.doc(documentId);
+      const updatedReadValue = !book.read;
+
+
+      documentRef.update({read: updatedReadValue })
+      .then(()=>{
+        book.read = updatedReadValue;
+
+        if(book.read){
+          btnRead.classList.remove('book-is-read');
+          btnRead.classList.add('book-is-not-read');
+          btnRead.innerHTML = "Book not read"
+          book.read = false;
+        }
+        else{
+          btnRead.classList.remove('book-is-not-read');
+          btnRead.classList.add('book-is-read');
+          btnRead.innerHTML = "Book has been read"
+          book.read = true;
+        }
+      })
+    })
 
     btnRemoveBook.addEventListener('click', ()=>{
       const documentId = book.docId;
@@ -252,7 +293,6 @@ const displayCard = (book) =>{
         cardDivReferences.splice(cardIndex, 1);
       }
       library.removeBook(book.title);
-      console.log(library);
     })
 
 

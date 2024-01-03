@@ -41,13 +41,18 @@
     <script src="./index.js" defer type="module"></script>
 </head>
 <body>
+    <div id="page-load-in-overlay" class="overlay-animations">
+        <div id="page-load-logo-container">
+            <img id="page-load-library-logo" src="./Images//library-logo-resized-SVG.svg" alt="Golden book logo with a planet on top of it" class="overlay-animations">
+        </div>
+    </div>
     <nav id="nav-bar" class="library-display">
         <div id="nav-container">
             <div id="logo-container">
-                <img id="library-logo" src="./Images/library-logo-png.png" alt="Golden book logo with a planet on top of it" >
+                <img id="library-logo" src="./Images/library-logo-resized.png" alt="Golden book logo with a planet on top of it" >
             </div>
             <div id="nav-options-container">
-                <button class="btn-nav" id="btn-remove-entries">Remove all entries</button>
+                <button class="btn-nav" id="btn-remove-entries" hidden>Remove all entries</button>
                 <div id="user-profile-container">
                     <img id="user-profile-image" src="" alt="User profile image">
                     <h1 id="user-name"></h1>
@@ -68,7 +73,6 @@
                     <button id="btn-add-book" class="btn-add-book golden-button">Add new book</button>
                 </div>
             </div>
-
         </div>
     </section>
     <footer id="footer" class="library-display">
@@ -82,7 +86,7 @@
         <div id="login-container">
             <div id="login-input-container">
                 <div id="login-logo-container">
-                    <img id="login-logo" src="./Images/library-logo-png.png" alt="" srcset="">
+                    <img id="login-logo" src="./Images/library-logo-resized.png" alt="" srcset="">
                 </div>
                 <div id="login-fields-container">
                     <h1 id="login-h1">LOGIN</h1>
